@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DragonContext from "../../context/DragonContext";
 import styled from "styled-components";
 import logo from "../../assets/logo-finale.png";
@@ -11,19 +11,18 @@ function initialState() {
   return { user: "", password: "" };
 }
 
-const Login = () => {
-  const { signIn } = useAuth();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    signIn(data);
-  };
+function singup({ user, password }) {
+  if (user === "admin" && password === "admin") {
+    return { token: "81dc9bdb52d04dc20036dbd8313ed055" };
+  }
 
+  return { token: null };
+}
+
+const Login = () => {
+  const { register, handleSubmit } = useForm();
+
+  const authentication = useAuth();
   const [values, setValues] = useState(initialState);
   const { setToken } = useContext(DragonContext);
   const navigate = useNavigate();
@@ -34,6 +33,23 @@ const Login = () => {
     setValues([...values, [name], value]);
   }
 
+  function onSubmit(event) {
+    //event.preventDefault();
+
+    const { token } = singup({ user: event.user, password: event.password });
+    console.log("ilumina me senhor ", event);
+
+    if (token === "81dc9bdb52d04dc20036dbd8313ed055") {
+      authentication.login();
+      return navigate("/");
+    } else {
+      authentication.logout();
+      return navigate("/login");
+    }
+
+    setValues(initialState);
+  }
+
   return (
     <Container>
       <Logo>
@@ -41,15 +57,26 @@ const Login = () => {
       </Logo>
 
       <form onSubmit={handleSubmit(onSubmit)}>
+        <ContainerForm>
+          <h3>Faça seu Cadastro</h3>
+          <Input
+            register={register}
+            name={"user"}
+            placeholder="Digite seu Nome"
+          />
+          <Input
+            register={register}
+            name={"password"}
+            placeholder="Digite sua Senha"
+          />
+          <button type="submit" value={"Logar"}>
+            Logar
+          </button>
+        </ContainerForm>
+      </form>
+
+      {/*<Form onSubmit={onSubmit}>
         <h3>Faça seu Cadastro</h3>
-
-        <input type="password" {...register("user", { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.user && <span>This field is required</span>}
-
-        <input type="password" {...register("password", { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.password && <span>This field is required</span>}
 
         {/*<Input
           type="text"
@@ -74,15 +101,17 @@ const Login = () => {
             })
           }
           value={values.password}
-        />*/}
+        />
 
-        <button type="submit">Logar</button>
-      </form>
+        <Link to="/">
+          <button type="submit">Logar</button>
+        </Link>
+        </Form>*/}
     </Container>
   );
 };
 
-const Form = styled.form`
+const ContainerForm = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -2,12 +2,12 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-const RoutesPrivate = ({ children, auth }) => {
-  const { user } = useAuth();
+const RoutesPrivate = ({ children }) => {
+  const authentication = useAuth();
+  
+  const authed = authentication.signed;
 
-  console.log({user})
-
-  return user ? children : <Navigate to="/login" />;
+  return authed ? children : <Navigate to="/login" />;
 };
 
 export default RoutesPrivate;

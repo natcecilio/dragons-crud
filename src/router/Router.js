@@ -15,31 +15,35 @@ import { useAuth } from "../context/AuthContext";
 
 const Router = () => {
   const [dragons, setDragons] = useLocalStorage("dragons", []);
-  const login = useAuth();
+  const teste = useAuth();
 
   return (
     <BrowserRouter>
       <Header />
-
+      {console.log("pfvr", teste)}
       <DragonContext.Provider value={{ dragons, setDragons }}>
         <Routes>
           <Route element={<App />} exact path="/login" />
           <Route
             path="/"
             element={
-              <RoutesPrivate auth={login}>
+              <RoutesPrivate>
                 <DragonList />
               </RoutesPrivate>
             }
           />
           <Route
             path="/add"
-            element={<RoutesPrivate auth={login} component={AddDragon} />}
+            element={
+              <RoutesPrivate>
+                <AddDragon />
+              </RoutesPrivate>
+            }
           />
           <Route
             path="/edit/:id"
             element={
-              <RoutesPrivate auth={login}>
+              <RoutesPrivate>
                 <EditDragon />
               </RoutesPrivate>
             }

@@ -1,40 +1,45 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-const Input = ({type, placeholder }) => {
+const Input = ({ type, placeholder, register, name }) => {
   return (
     <Container>
-      <StyledInput placeholder={placeholder && placeholder} type=
-      {type ? type : "text"} required autoComplete='off'
+      <input
+        style={StyledInput}
+        {...register(name)}
+        placeholder={placeholder && placeholder}
+        type={type ? type : "text"}
+        required
+        autoComplete="off"
       />
-      <Status />
+      {/*<Status />*/}
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
-const StyledInput = styled.input`
-  width: 80%;
-  max-width: 350px;
-  min-width: 250px;
-  height: 40px;
-  border: none;
-  margin: 0.5rem 0;
-  background-color: #f5f5f5;
-  box-shadow: 0px 14px 9px -15px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  padding: 0 1rem;
-  transition: all 0.2s ease-in;
+const StyledInput = {
+  width: "80%",
+  maxWidth: "350px",
+  minWidth: "250px",
+  height: "40px",
+  border: "none",
+  bordeRadius: "15px",
+  margin: "0.5rem 0",
+  backgroundColor: "#f5f5f5",
+  boxShadow: "0px 14px 9px -15px rgba(0, 0, 0, 0.25)",
+  padding: "0 1rem",
+  transition: "all 0.2s ease-in",
 
-  &:hover {
-    transform: translateY(-3px);
-  }
-`
+  //&:hover {
+  //transform: translateY(-3px);
+  //}
+};
 
 const Status = styled.div`
   height: 10px;
@@ -43,7 +48,6 @@ const Status = styled.div`
   border-radius: 10px;
   margin-left: 1rem;
 
-
   ${StyledInput}:invalid + & {
     background: #9d9d9d;
   }
@@ -51,6 +55,6 @@ const Status = styled.div`
   ${StyledInput}:valid + & {
     background: #027502;
   }
-`
+`;
 
 export default Input;
