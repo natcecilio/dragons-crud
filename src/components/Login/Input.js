@@ -35,10 +35,6 @@ const StyledInput = {
   boxShadow: "0px 14px 9px -15px rgba(0, 0, 0, 0.25)",
   padding: "0 1rem",
   transition: "all 0.2s ease-in",
-
-  //&:hover {
-  //transform: translateY(-3px);
-  //}
 };
 
 const Status = styled.div`

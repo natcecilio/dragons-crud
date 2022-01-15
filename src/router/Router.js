@@ -20,7 +20,6 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Header />
-      {console.log("pfvr", teste)}
       <DragonContext.Provider value={{ dragons, setDragons }}>
         <Routes>
           <Route element={<App />} exact path="/login" />

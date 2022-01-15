@@ -34,10 +34,7 @@ const Login = () => {
   }
 
   function onSubmit(event) {
-    //event.preventDefault();
-
     const { token } = singup({ user: event.user, password: event.password });
-    console.log("ilumina me senhor ", event);
 
     if (token === "81dc9bdb52d04dc20036dbd8313ed055") {
       authentication.login();
@@ -74,39 +71,6 @@ const Login = () => {
           </button>
         </ContainerForm>
       </form>
-
-      {/*<Form onSubmit={onSubmit}>
-        <h3>Faça seu Cadastro</h3>
-
-        {/*<Input
-          type="text"
-          id="user"
-          placeholder="Digite seu Nome"
-          onChange={(e) =>
-            setUser((user) => {
-              return { ...user, user: e.target.value };
-            })
-          }
-          value={values.user}
-        />
-
-        <Input
-          type="password"
-          id="password"
-          placeholder="Digite sua Senha"
-          onChange={(e) =>
-            setUser((user) => {
-              console.log("teste", e.target.value);
-              return { ...user, password: e.target.value };
-            })
-          }
-          value={values.password}
-        />
-
-        <Link to="/">
-          <button type="submit">Logar</button>
-        </Link>
-        </Form>*/}
     </Container>
   );
 };
