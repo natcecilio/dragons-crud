@@ -21,7 +21,15 @@ Para executar esta aplicação, use:
 yarn start
 ```
 Abrir http://localhost:3000 para visualizar no navegador.
-
+  
+  ```sh
+Acessar login
+```
+  para ter acesso a aplicação utilizar 
+ * nome: admin  
+ * senha: admin 
+  
+## Escolha o seu 🐲
 
 
 ---
